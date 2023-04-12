@@ -1,0 +1,59 @@
+server:
+  port: 8080
+  #servlet:
+    #context-path: /api
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  application:
+    name: springfox-swagger
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://152.136.13.69:3306/join_blog?serverTimezone=UTC
+      username: join_test
+      password: DR)bH@p>o^ofB1!=}hk2
+      # 链接池初始化大小
+      initial-size: 8
+      # 最大活跃数
+      max-active: 16
+      # 最小空闲数
+      min-idle: 1
+      # 最大等待时间
+      max-wait: 60000
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+#mp日志
+mybatis-plus:
+  mapper-locations: classpath*:mapper/**/*.xml
+  type-aliases-package: com.joinwebsite.blog.api.entity
+  typeEnumsPackage: com.joinwebsite.blog.api.enums
+  global-config:
+    db-config:
+      table-prefix: t_
+      # table-prefix: t_ means that the table name in the database is prefixed with "t_".
+      id-type: assign_id
+      logic-delete-field: isDeleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#swagger
+swagger:
+  enable: true
+  application-name: ${spring.application.name}
+  application-version: 1.0
+  application-description: springfox swagger 3.0整合Demo
+  try-host: http://localhost:${server.port}
+
+#logging配置
+loging:
+  level:
+    org:
+      springframework:
+        boot:
+          autoconfigure: error
